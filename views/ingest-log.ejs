@@ -1,0 +1,113 @@
+<%- include('header') %>
+
+<div class="container mt-4">
+  <div class="card">
+    <h1 class="card-header">
+      Log Ingestion 
+      <small class="text-muted">(All fields are mandatory)</small>
+    </h1>
+    <div class="card-body">
+      <form id="logForm">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="level">Level:</label>
+              <input type="text" class="form-control" id="level" name="level" required>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message:</label>
+              <input type="text" class="form-control" id="message" name="message" required>
+            </div>
+
+            <div class="form-group">
+              <label for="resourceId">Resource ID:</label>
+              <input type="text" class="form-control" id="resourceId" name="resourceId" required>
+            </div>
+
+            <div class="form-group">
+              <label for="traceId">Trace ID:</label>
+              <input type="text" class="form-control" id="traceId" name="traceId" required>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="spanId">Span ID:</label>
+              <input type="text" class="form-control" id="spanId" name="spanId" required>
+            </div>
+
+            <div class="form-group">
+              <label for="commit">Commit:</label>
+              <input type="text" class="form-control" id="commit" name="commit" required>
+            </div>
+
+            <div class="form-group">
+              <label for="parentResourceId">Parent Resource ID:</label>
+              <input type="text" class="form-control" id="parentResourceId" name="metadata.parentResourceId" required>
+            </div>
+ 
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary mt-3" onclick="ingestLog()">Ingest Log</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  async function ingestLog() {
+    // Check if all mandatory fields are filled
+    if (
+      document.getElementById('level').checkValidity() &&
+      document.getElementById('message').checkValidity() &&
+      document.getElementById('resourceId').checkValidity() &&
+      document.getElementById('traceId').checkValidity() &&
+      document.getElementById('spanId').checkValidity() &&
+      document.getElementById('commit').checkValidity() &&
+      document.getElementById('parentResourceId').checkValidity()
+    ) {
+      const logData = {
+        level: document.getElementById('level').value,
+        message: document.getElementById('message').value,
+        resourceId: document.getElementById('resourceId').value,
+        traceId: document.getElementById('traceId').value,
+        spanId: document.getElementById('spanId').value,
+        commit: document.getElementById('commit').value,
+        metadata: {
+          parentResourceId: document.getElementById('parentResourceId').value
+        }
+      };
+
+      try {
+        const response = await fetch('/ingest-log', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(logData),
+        });
+
+        if (response.ok) {
+          console.log('Log ingested successfully');
+          // Show an alert to the user
+          alert('Log ingested successfully');
+          // Refresh the page and clear input fields
+          location.reload(true);
+        } else {
+          console.error('Log ingestion failed');
+          alert('Log ingestion failed');
+        }
+      } catch (error) {
+        console.error('Log ingestion error:', error);
+        alert('Log ingestion error');
+      }
+    } else {
+      // Show an alert if any mandatory field is empty
+      alert('Please fill in all mandatory fields.');
+    }
+  }
+</script>
+
+<%- include('footer') %>

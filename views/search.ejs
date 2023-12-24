@@ -1,0 +1,65 @@
+<%- include('header') %>
+
+<div class="container mt-4">
+  <div class="card">
+    <h1 class="card-header">Log Search <small class="text-muted">Type in the fields you want to search</small></h1>
+    <div class="card-body">
+      <form action="/search-results" method="get">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="level">Level:</label>
+              <input type="text" class="form-control" id="level" name="level">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message:</label>
+              <input type="text" class="form-control" id="message" name="message">
+            </div>
+
+            <div class="form-group">
+              <label for="resourceId">Resource ID:</label>
+              <input type="text" class="form-control" id="resourceId" name="resourceId">
+            </div>
+
+            <div class="form-group">
+              <label for="traceId">Trace ID:</label>
+              <input type="text" class="form-control" id="traceId" name="traceId">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="startTimestamp">Start Timestamp:</label>
+              <input type="datetime-local" class="form-control" id="startTimestamp" name="startTimestamp">
+            </div>
+
+            <div class="form-group">
+              <label for="endTimestamp">End Timestamp:</label>
+              <input type="datetime-local" class="form-control" id="endTimestamp" name="endTimestamp">
+            </div>
+
+            <div class="form-group">
+              <label for="spanId">Span ID:</label>
+              <input type="text" class="form-control" id="spanId" name="spanId">
+            </div>
+
+            <div class="form-group">
+              <label for="commit">Commit:</label>
+              <input type="text" class="form-control" id="commit" name="commit">
+            </div>
+
+            <div class="form-group">
+              <label for="parentResourceId">Parent Resource ID:</label>
+              <input type="text" class="form-control" id="parentResourceId" name="metadata.parentResourceId">
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('footer') %>

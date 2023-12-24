@@ -1,0 +1,40 @@
+<%- include('header') %>
+
+<div class="container mt-4">
+  <h1>Log Search Results</h1>
+  <% if (logs.length === 0) { %>
+    <p>No logs found.</p>
+  <% } else { %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Level</th>
+          <th>Message</th>
+          <th>Resource ID</th>
+          <th>Timestamp</th>
+          <th>Trace ID</th>
+          <th>Span ID</th>
+          <th>Commit</th>
+          <th>Parent Resource ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% logs.reverse().forEach(log => { %>
+           
+          <tr>
+            <td><%= log.level %></td>
+            <td><%= log.message %></td>
+            <td><%= log.resourceId %></td>
+            <td><%= log.timestamp %></td>
+            <td><%= log.traceId %></td>
+            <td><%= log.spanId %></td>
+            <td><%= log.commit %></td>
+            <td><%= log.metadata && log.metadata.parentResourceId %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</div>
+
+<%- include('footer') %>

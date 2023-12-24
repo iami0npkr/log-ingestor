@@ -1,0 +1,44 @@
+ 
+
+<%- include('header') %>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card bg-light mb-3" style="height: 95%;">
+        <div class="card-header">Ingest Logs</div>
+        <div class="card-body">
+          <h5 class="card-title">Log Ingestion System</h5>
+          <p class="card-text">Efficiently ingest logs into the system. Use the provided form to submit logs.</p>
+          <a href="/ingest" class="btn btn-primary">Go to Ingestion</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card bg-light mb-3" style="height: 95%;">
+        <div class="card-header">Query Logs</div>
+        <div class="card-body">
+          <h5 class="card-title">Log Query Interface</h5>
+          <p class="card-text">Efficiently search and filter logs. Use the search form to explore logs based on various criteria.</p>
+          <a href="/search" class="btn btn-primary">Go to Query Interface</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mt-4">
+      <div class="card bg-light mb-3" style="height: 95%;">
+        <div class="card-header">How to Use the App</div>
+        <div class="card-body">
+            <p class="card-text">Welcome to the Log Management System! To get started:</p>
+            <ol>
+              <li>Click "Ingest Logs" to submit new logs using the provided form.</li>
+              <li>Explore and filter logs efficiently by clicking "Query Logs."</li>
+            </ol>
+            
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('footer') %>
